@@ -2,6 +2,8 @@
 
 import numpy as np
 from scipy.integrate import quad
+from scipy.interpolate import CubicSpline
+from scipy.interpolate import interp1d
 from glasstone.utilities import convert_units, ValueOutsideGraphError
 
 # First, some utility functions; these should go in a dedicated file eventually
@@ -661,43 +663,57 @@ def _soviet_mach_sh20(range):
     if 0 <= range <= _soviet_mach_sh20x[-1]:
         return np.interp(range, _soviet_mach_sh20x, _soviet_mach_sh20y)
     else:
-        raise ValueOutsideGraphError(range)
+        func = interp1d(_soviet_mach_sh20x, _soviet_mach_sh20y, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        temp_str = func(range)
+        return temp_str.item() 
 
 def _soviet_mach_sh12(range):
     if 0 <= range <= _soviet_mach_sh12x[-1]:
         return np.interp(range, _soviet_mach_sh12x, _soviet_mach_sh12y)
     else:
-        raise ValueOutsideGraphError(range)
+        func = interp1d(_soviet_mach_sh12x, _soviet_mach_sh12y, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        temp_str = func(range)
+        return temp_str.item() 
 
 def _soviet_mach_sh7(range):
     if _soviet_mach_sh7x[0] <= range <= _soviet_mach_sh7x[-1]:
         return np.interp(range, _soviet_mach_sh7x, _soviet_mach_sh7y)
     else:
-        raise ValueOutsideGraphError(range)
+        func = interp1d(_soviet_mach_sh7x, _soviet_mach_sh7y, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        temp_str = func(range)
+        return temp_str.item() 
 
 def _soviet_nomach_sh20(range):
     if 0 <= range <= _soviet_nomach_sh20x[-1]:
         return np.interp(range, _soviet_nomach_sh20x, _soviet_nomach_sh20y)
     else:
-        raise ValueOutsideGraphError(range)
+        func = interp1d(_soviet_nomach_sh20x, _soviet_nomach_sh20y, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        temp_str = func(range)
+        return temp_str.item() 
 
 def _soviet_nomach_sh12(range):
     if 0 <= range <= _soviet_nomach_sh12x[-1]:
         return np.interp(range, _soviet_nomach_sh12x, _soviet_nomach_sh12y)
     else:
-        raise ValueOutsideGraphError(range)
+        func = interp1d(_soviet_nomach_sh12x, _soviet_nomach_sh12y, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        temp_str = func(range)
+        return temp_str.item() 
 
 def _soviet_nomach_sh7(range):
     if _soviet_nomach_sh7x[0] <= range <= _soviet_nomach_sh7x[-1]:
         return np.interp(range, _soviet_nomach_sh7x, _soviet_nomach_sh7y)
     else:
-        raise ValueOutsideGraphError(range)
+        func = interp1d(_soviet_nomach_sh7x, _soviet_nomach_sh7y, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        temp_str = func(range)
+        return temp_str.item() 
 
 def _soviet_ground(range):
     if _soviet_groundx[0] <= range <= _soviet_groundx[-1]:
         return np.interp(range, _soviet_groundx, _soviet_groundy)
     else:
-        raise ValueOutsideGraphError(range)
+        func = interp1d(_soviet_groundx, _soviet_groundy, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        temp_str = func(range)
+        return temp_str.item()      
 
 def lerp10(h, h1, h2, o1, o2):
     """Returns 10**o, where o is the linear interpolation of value h between (h1, o1) 
@@ -712,7 +728,9 @@ def _sovietmach(scale_height, ground_range):
     elif 0 <= scale_height < 70:
         return lerp10(scale_height, 0, 70, _soviet_ground(ground_range), _soviet_mach_sh7(ground_range))
     else:
-        raise ValueOutsideGraphError(scale_height)
+        func = interp1d(_soviet_groundx, _soviet_groundy, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        extrapolated_value = func(scale_height)
+        return extrapolated_value.item()
         
 def _sovietnomach(scale_height, ground_range):
     if 120 < scale_height <= 200:
@@ -722,7 +740,9 @@ def _sovietnomach(scale_height, ground_range):
     elif 0 <= scale_height < 70:
         return lerp10(scale_height, 0, 70, _soviet_ground(ground_range), _soviet_nomach_sh7(ground_range))
     else:
-        raise ValueOutsideGraphError(scale_height)
+        func = interp1d(_soviet_groundx, _soviet_groundy, kind='linear', axis=0, fill_value='extrapolate', assume_sorted=True)
+        extrapolated_value = func(scale_height)
+        return extrapolated_value.item()
 
 _rsoviet_mach_sh20x = _soviet_mach_sh20x[::-1]
 
