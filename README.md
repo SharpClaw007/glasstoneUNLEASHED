@@ -31,7 +31,7 @@ Nope, not even close. Check back to this section for updates on progress.
 
 | TODO://                                           |                                                                                                                                                |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| overpressure.py                                 | remove error checking code, integrate extrapolation algorithm                                                                                  
+| overpressure.py                                 | integrate remaining overpressure models, clean up code                                                                                  
 | thermal.py                                    | remove error checking code, integrate extrapolation algorithm                                          
 | radiation.py                                    | remove error checking code, integrate extrapolation algorithm                                          
 
