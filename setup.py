@@ -16,4 +16,4 @@ setup(
     url='https://github.com/GOFAI/glasstone',
     license='MIT',
     packages=['glasstone'],
-    install_requires=['numpy', 'scipy', 'affine'])
+    install_requires=['numpy', 'scipy', 'affine', 'tkinter', 'matplotlib', 'pandas'])
