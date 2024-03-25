@@ -7,6 +7,8 @@ GLASSTONE//UNLEASHED-nuclear weapons effects modelling in Python
 
 This is a fork of a nuclear blast effects library developed by Edward Geist. The link to the actual master repo will be linked below.
 
+**I'D LIKE TO BE CRYSTAL CLEAR ON THIS: I DID NOT WRITE THE GLASSTONE PACKAGE. THIS IS A MODIFICATION. ALL CREDIT GOES TO EDWARD GIEST AND SAMUEL GLASSTONE.***
+
 If you care about accuracy/stability at all, use the official project.
 
 ## Why does this exist?
